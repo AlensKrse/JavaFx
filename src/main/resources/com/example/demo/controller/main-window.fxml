@@ -11,12 +11,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+<BorderPane fx:id="mainBorderPane" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.demo.controller.ListController">
     <top>
         <MenuBar>
             <Menu text="File">
-                <MenuItem text="New..."/>
+                <MenuItem text="New..." onAction="#showNewItemDialog"/>
                 <SeparatorMenuItem/>
                 <MenuItem text="Exit"/>
             </Menu>
@@ -30,7 +30,7 @@
 
     <center>
         <VBox>
-            <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS"/>
+            <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS" wrapText="true"/>
             <HBox style="-fx-background-color: white">
                 <Label text="Due: ">
                     <font>
