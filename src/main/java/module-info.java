@@ -2,6 +2,7 @@ module com.example.demo {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires lombok;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -13,4 +14,6 @@ module com.example.demo {
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
+    exports com.example.demo.controller;
+    opens com.example.demo.controller to javafx.fxml;
 }

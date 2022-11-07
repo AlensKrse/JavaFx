@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.controller.HelloController">
+    <top>
+        <Label text="Middle text" BorderPane.alignment="CENTER"
+               style="-fx-border-color: green;-fx-border-style: dashed;-fx-border-width: 3"/>
+    </top>
+
+    <center>
+        <FlowPane
+                style="-fx-border-color: yellow;-fx-border-style: dashed;-fx-border-width: 3">
+            <Button text="1"/>
+            <Button text="2"/>
+            <Button text="3"/>
+            <Button text="4"/>
+            <Button text="5"/>
+            <Button text="6"/>
+            <Button text="7"/>
+            <Button text="8"/>
+            <Button text="9"/>
+            <Button text="10"/>
+        </FlowPane>
+    </center>
+    <left>
+        <TilePane
+                style="-fx-border-color: black;-fx-border-style: dashed;-fx-border-width: 3">
+            <Button text="1"/>
+            <Button text="2"/>
+            <Button text="3"/>
+            <Button text="4"/>
+            <Button text="5"/>
+            <Button text="6"/>
+            <Button text="7"/>
+            <Button text="8"/>
+            <Button text="9"/>
+            <Button text="10"/>
+        </TilePane>
+    </left>
+    <right>
+        <StackPane
+                style="-fx-border-color: red;-fx-border-style: dashed;-fx-border-width: 3">
+            <Button text="1"/>
+            <Button text="2"/>
+            <Button text="3"/>
+            <Button text="4"/>
+            <Button text="5"/>
+            <Button text="6"/>
+            <Button text="7"/>
+            <Button text="8"/>
+            <Button text="9"/>
+            <Button text="10"/>
+        </StackPane>
+    </right>
+    <bottom>
+        <HBox spacing="10" alignment="BOTTOM_RIGHT">
+            <padding>
+                <Insets bottom="10" right="10"/>
+            </padding>
+
+            <Button text="Okey" prefWidth="70"/>
+            <Button text="Cancel" prefWidth="70"/>
+            <Button text="Help" prefWidth="70"/>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
+<GridPane alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.example.demo.controller.HelloController" gridLinesVisible="true">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label fx:id="welcomeText" textFill="aqua">
+        <font>
+            <Font name="Time New Roman bold" size="70"/>
+        </font>
+    </Label>
+
+    <Button text="one" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <Button text="two" GridPane.rowIndex="0" GridPane.columnIndex="1"  GridPane.halignment="RIGHT"/>
+    <Button text="three" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Button text="four" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Button text="five" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Button text="loooooooooongeeee button" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <Button text="five" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+</GridPane>
