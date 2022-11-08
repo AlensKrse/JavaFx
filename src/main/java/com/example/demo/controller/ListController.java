@@ -2,11 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.model.TodoData;
 import com.example.demo.model.TodoItem;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
@@ -14,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -26,8 +31,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class ListController {
 
@@ -46,6 +53,13 @@ public class ListController {
     @FXML
     private ContextMenu listContextMenu;
 
+    @FXML
+    private CheckBox filterCheckBok;
+
+    private FilteredList<TodoItem> filteredList;
+    private static final Predicate<TodoItem> ALL_ITEMS = (item -> true);
+    private static final Predicate<TodoItem> TODAY_ITEMS = (item -> item.getDeadline().equals(LocalDate.now()));
+
     public void initialize() {
         listContextMenu = new ContextMenu();
         final MenuItem deleteMenuItem = new MenuItem("Delete");
@@ -63,7 +77,9 @@ public class ListController {
                 deadlineLabel.setText(dateTimeFormatter.format(selectedItem.getDeadline()));
             }
         });
-        todoListView.setItems(TodoData.getInstance().getTodoItems());
+        filteredList = new FilteredList<>(TodoData.getInstance().getTodoItems(), ALL_ITEMS);
+        final SortedList<TodoItem> sortedTodoItems = new SortedList<>(filteredList, Comparator.comparing(TodoItem::getDeadline));
+        todoListView.setItems(sortedTodoItems);
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
         todoListView.setCellFactory(getListViewListCellCallback());
@@ -152,5 +168,31 @@ public class ListController {
         if (Objects.nonNull(selectedItem) && keyEvent.getCode().equals(KeyCode.BACK_SPACE)) {
             deleteItem(selectedItem);
         }
+    }
+
+    @FXML
+    public void handleFilterButton() {
+        final MultipleSelectionModel<TodoItem> selectionModel = todoListView.getSelectionModel();
+        final TodoItem selectedItem = selectionModel.getSelectedItem();
+
+        if (filterCheckBok.isSelected()) {
+            filteredList.setPredicate(TODAY_ITEMS);
+            if (filteredList.isEmpty()) {
+                itemDetailsTextArea.clear();
+                deadlineLabel.setText("");
+            } else if (filteredList.contains(selectedItem)) {
+                selectionModel.select(selectedItem);
+            } else {
+                selectionModel.selectFirst();
+            }
+        } else {
+            filteredList.setPredicate(ALL_ITEMS);
+            selectionModel.select(selectedItem);
+        }
+    }
+
+    @FXML
+    public void handleExit() {
+        Platform.exit();
     }
 }

@@ -16,6 +16,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.CheckBox?>
 <BorderPane fx:id="mainBorderPane" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.demo.controller.ListController">
     <top>
@@ -24,11 +26,11 @@
                 <Menu text="File">
                     <MenuItem text="New..." onAction="#showNewItemDialog"/>
                     <SeparatorMenuItem/>
-                    <MenuItem text="Exit"/>
+                    <MenuItem text="Exit" onAction="#handleExit"/>
                 </Menu>
             </MenuBar>
             <ToolBar>
-                <HBox>
+                <HBox spacing="5">
                     <Button onAction="#showNewItemDialog">
                         <tooltip>
                             <Tooltip text="Add new Todo item."/>
@@ -39,6 +41,11 @@
                             </ImageView>
                         </graphic>
                     </Button>
+                    <CheckBox fx:id="filterCheckBok"  onAction="#handleFilterButton" text="Today's Items">
+                        <tooltip>
+                            <Tooltip text="Button Down: Show Today's items only. Button Up: Show all items."/>
+                        </tooltip>
+                    </CheckBox>
                 </HBox>
             </ToolBar>
         </VBox>
