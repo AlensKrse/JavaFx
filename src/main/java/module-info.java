@@ -3,6 +3,8 @@ module com.example.demo {
     requires javafx.fxml;
     requires javafx.web;
     requires lombok;
+    requires java.datatransfer;
+    requires java.desktop;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
